@@ -19,3 +19,9 @@ Ejecutar el servidor:
 Cambiar el idioma en config/settings.py
 
     LANGUAGE_CODE = 'es'
+
+Crear aplicación
+
+    python manage.py startapp core
+
+Después hay que registrarla en settings
