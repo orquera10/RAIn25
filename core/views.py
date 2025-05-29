@@ -49,3 +49,8 @@ def ejercicio(request):
     return render(
         request, "core/ejercicio.html", {"nombre": nombre, "apellido": apellido}
     )
+
+
+def notas(request):
+    lista_de_notas = [10, 8, 3, 7, 4, 5, 8]
+    return render(request, "core/notas.html", {"notas": lista_de_notas})
