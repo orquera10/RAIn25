@@ -54,3 +54,12 @@ def ejercicio(request):
 def notas(request):
     lista_de_notas = [10, 8, 3, 7, 4, 5, 8]
     return render(request, "core/notas.html", {"notas": lista_de_notas})
+
+
+def ejercicio2(request):
+    datos = [
+        {"nombre": "juan", "email": "juan@django"},
+        {"nombre": "santi", "email": "santi@django"},
+        {"nombre": "agustín", "email": "agus@django"},
+    ]
+    return render(request, "core/ejercicio2.html", {"usuarios": datos})
