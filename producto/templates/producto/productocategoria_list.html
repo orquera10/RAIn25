@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Productos: Lista de categorías de productos
+{% endblock title %}
+
+{% block content %}
+    <button>
+        <a href="{% url 'producto:index' %}">Volver</a>
+    </button>    
+    {% for object in productocategoria %}
+        <p> {{ object }} </p>
+    {% endfor %}
+{% endblock content %}
