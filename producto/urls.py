@@ -11,4 +11,9 @@ urlpatterns = [
         views.productocategoria_list,
         name="productocategoria_list",
     ),
+    path(
+        "productocategoria/create/",
+        views.productocategoria_create,
+        name="productocategoria_create",
+    ),
 ]

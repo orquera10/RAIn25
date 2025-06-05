@@ -5,5 +5,12 @@
 {% endblock title %}
 
 {% block content %}
-    <a href="{% url 'producto:productocategoria_list' %}">Listar Categorías de Productos</a>
+
+    <button>
+        <a href="{% url 'producto:productocategoria_list' %}">Listar Categorías de Productos</a>
+    </button>
+    <button>
+        <a href="{% url 'producto:productocategoria_create' %}">Crear Categoría de Productos</a>
+    </button>
+
 {% endblock content %}
