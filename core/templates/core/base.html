@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coderhouse</title>
+</head>
+<body style="display:grid; justify-items: center; align-items: center; height: 100vh;">
+
+    {% include 'core/navbar.html' %}
+    
+    <h1 style="color: skyblue;">
+        {% block title %}
+        {% endblock title %}
+    </h1>
+
+    {% block content %}
+    {% endblock content %}
+
+    {% include 'core/footer.html' %}
+</body>
+</html>

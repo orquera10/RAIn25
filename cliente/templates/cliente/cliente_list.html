@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Clientes
+{% endblock title %}
+
+{% block content %}
+    <button>
+        <a href="{% url 'cliente:index' %}">Volver</a>
+    </button>    
+    {% for cliente in clientes %}
+        <p> {{ cliente }} </p>
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Clientes    
+{% endblock title %}
+
+{% block content %}
+    <a href="{% url 'cliente:pais_list' %}">Listar países</a>
+    <a href="{% url 'cliente:cliente_list' %}">Listar clientes</a>
+    <button>
+        <a href="/">Inicio</a>
+    </button>    
+{% endblock content %}

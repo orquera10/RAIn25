@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Países de origen
+{% endblock title %}
+
+{% block content %}
+    <button>
+        <a href="{% url 'cliente:index' %}">Volver</a>
+    </button>    
+    {% for pais in paises %}
+        <p> {{ pais }} </p>
+    {% endfor %}
+{% endblock content %}
