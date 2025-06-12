@@ -23,8 +23,7 @@
                 </li>
                 
                 <!-- Menú desplegable de Productos -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {% if request.resolver_match.app_name == 'producto' %}active{% endif %}" 
+                <li class="nav-item dropdown">                    <a class="nav-link dropdown-toggle {% if request.resolver_match.app_name == 'producto' %}active{% endif %}" 
                        href="#" id="navbarDropdownProductos" role="button" 
                        data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-box-seam me-1"></i>Productos
@@ -36,6 +35,11 @@
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'producto:producto_list' %}">
+                                <i class="bi bi-box-seam me-2"></i>Productos
+                            </a>
+                        </li>
                         <li>
                             <a class="dropdown-item" href="{% url 'producto:productocategoria_list' %}">
                                 <i class="bi bi-tags me-2"></i>Categorías

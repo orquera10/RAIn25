@@ -1,0 +1,70 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Detalle de Producto
+{% endblock title %}
+
+{% block content %}
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{% url 'producto:producto_list' %}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Volver a la lista
+        </a>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h5 class="card-title mb-0">
+                <i class="bi bi-box-seam me-2"></i>
+                {{ object.nombre }}
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th style="width: 150px;">Nombre:</th>
+                                <td>{{ object.nombre }}</td>
+                            </tr>
+                            {% if object.categoria %}
+                            <tr>
+                                <th>Categoría:</th>
+                                <td>{{ object.categoria }}</td>
+                            </tr>
+                            {% endif %}
+                            {% if object.descripcion %}
+                            <tr>
+                                <th>Descripción:</th>
+                                <td>{{ object.descripcion }}</td>
+                            </tr>
+                            {% endif %}
+                            <tr>
+                                <th>Precio:</th>
+                                <td class="text-success">${{ object.precio }}</td>
+                            </tr>
+                            <tr>
+                                <th>Stock:</th>
+                                <td>
+                                    <span class="badge bg-{% if object.stock > 10 %}success{% elif object.stock > 0 %}warning{% else %}danger{% endif %}">
+                                        {{ object.stock }} unidades
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'producto:producto_update' object.pk %}" class="btn btn-warning">
+                            <i class="bi bi-pencil"></i> Editar
+                        </a>
+                        <a href="{% url 'producto:producto_delete' object.pk %}" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -6,3 +6,12 @@ class ProductoCategoriaForm(forms.ModelForm):
     class Meta:
         model = models.ProductoCategoria
         fields = "__all__"
+
+
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = models.Producto
+        fields = "__all__"
+        widgets = {
+            'descripcion': forms.Textarea(attrs={'rows': 3}),
+        }

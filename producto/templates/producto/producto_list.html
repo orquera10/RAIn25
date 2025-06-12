@@ -1,0 +1,72 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Productos
+{% endblock title %}
+
+{% block content %}
+    <div class="d-flex justify-content-between mb-3">
+        <div>
+            <a href="{% url 'producto:producto_create' %}" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Nuevo Producto
+            </a>
+            <a href="{% url 'producto:index' %}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+        </div>
+        <form method="get" class="d-flex">
+            <input type="text" name="consulta" class="form-control me-2" placeholder="Buscar productos...">
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="bi bi-search"></i>
+            </button>
+        </form>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for producto in productos %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">{{ producto.nombre }}</h5>
+                        <span class="badge bg-light text-primary">Stock: {{ producto.stock }}</span>
+                    </div>
+                    <div class="card-body">
+                        {% if producto.categoria %}
+                            <p class="card-text">
+                                <i class="bi bi-tag-fill"></i>
+                                {{ producto.categoria }}
+                            </p>
+                        {% endif %}
+                        {% if producto.descripcion %}
+                            <p class="card-text">{{ producto.descripcion|truncatewords:30 }}</p>
+                        {% endif %}
+                        <p class="card-text">
+                            <strong>Precio:</strong>
+                            <span class="text-success">${{ producto.precio }}</span>
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <div class="btn-group w-100">
+                            <a href="{% url 'producto:producto_detail' producto.id %}" class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-eye"></i> Ver
+                            </a>
+                            <a href="{% url 'producto:producto_update' producto.id %}" class="btn btn-outline-warning btn-sm">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>
+                            <a href="{% url 'producto:producto_delete' producto.id %}" class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    No hay productos registrados
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

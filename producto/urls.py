@@ -6,6 +6,7 @@ app_name = "producto"
 
 urlpatterns = [
     path("", views.index, name="index"),
+    # URLs para ProductoCategoria
     path(
         "productocategoria/list/",
         views.ProductoCategoriaListView.as_view(),
@@ -30,5 +31,31 @@ urlpatterns = [
         "productocategoria/delete/<int:pk>",
         views.ProductoCategoriaDeleteView.as_view(),
         name="productocategoria_delete",
+    ),
+    # URLs para Producto
+    path(
+        "producto/list/",
+        views.ProductoListView.as_view(),
+        name="producto_list",
+    ),
+    path(
+        "producto/create/",
+        views.ProductoCreateView.as_view(),
+        name="producto_create",
+    ),
+    path(
+        "producto/update/<int:pk>",
+        views.ProductoUpdateView.as_view(),
+        name="producto_update",
+    ),
+    path(
+        "producto/detail/<int:pk>",
+        views.ProductoDetailView.as_view(),
+        name="producto_detail",
+    ),
+    path(
+        "producto/delete/<int:pk>",
+        views.ProductoDeleteView.as_view(),
+        name="producto_delete",
     ),
 ]

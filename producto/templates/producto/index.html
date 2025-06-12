@@ -1,16 +1,45 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-    Productos    
+    Panel de Productos    
 {% endblock title %}
 
 {% block content %}
+<div class="row g-4">
+    <!-- Card para Categorías -->
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body text-center" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1506619216599-9d16d0903dfd?ixlib=rb-4.0.3') no-repeat center/cover;">
+                <div class="py-5">
+                    <h2 class="card-title text-white mb-4">
+                        <i class="bi bi-tags-fill"></i>
+                        Categorías
+                    </h2>
+                    <p class="card-text text-white mb-4">Gestiona las categorías de productos</p>
+                    <a href="{% url 'producto:productocategoria_list' %}" class="btn btn-light btn-lg">
+                        <i class="bi bi-arrow-right"></i> Ir a Categorías
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <button>
-        <a href="{% url 'producto:productocategoria_list' %}">Listar Categorías de Productos</a>
-    </button>
-    <button>
-        <a href="{% url 'producto:productocategoria_create' %}">Crear Categoría de Productos</a>
-    </button>
-
+    <!-- Card para Productos -->
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body text-center" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-4.0.3') no-repeat center/cover;">
+                <div class="py-5">
+                    <h2 class="card-title text-white mb-4">
+                        <i class="bi bi-box-seam-fill"></i>
+                        Productos
+                    </h2>
+                    <p class="card-text text-white mb-4">Administra tu inventario de productos</p>
+                    <a href="{% url 'producto:producto_list' %}" class="btn btn-light btn-lg">
+                        <i class="bi bi-arrow-right"></i> Ir a Productos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}

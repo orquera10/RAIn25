@@ -9,15 +9,8 @@ def index(request):
     return render(request, "producto/index.html")
 
 
-# def productocategoria_list(request):
-#     productocategoria = models.ProductoCategoria.objects.all()
-#     contexto = {"productocategoria": productocategoria}
-#     return render(request, "producto/productocategoria_list.html", contexto)
-
 class ProductoCategoriaListView(ListView):
     model = models.ProductoCategoria
-    # context_object_name = "productocategoria"
-    # template_name = "producto/productocategoria_list.html"
 
     def get_queryset(self):
         consulta = self.request.GET.get("consulta")
@@ -28,29 +21,17 @@ class ProductoCategoriaListView(ListView):
         return queryset
 
 
-
-# def productocategoria_create(request):
-#     if request.method == "GET":
-#         form = forms.ProductoCategoriaForm()
-#     if request.method == "POST":
-#         form = forms.ProductoCategoriaForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect("producto:productocategoria_list")
-
-#     contexto = {"form": form}
-#     return render(request, "producto/productocategoria_create.html", contexto)
-
 class ProductoCategoriaCreateView(CreateView):
     model = models.ProductoCategoria
     form_class = forms.ProductoCategoriaForm
     success_url = reverse_lazy("producto:productocategoria_list")
-    # template_name = "producto/productocategoria_create.html"
+
 
 class ProductoCategoriaUpdateView(UpdateView):
     model = models.ProductoCategoria
     form_class = forms.ProductoCategoriaForm
     success_url = reverse_lazy("producto:productocategoria_list")
+
 
 class ProductoCategoriaDetailView(DetailView):
     model = models.ProductoCategoria
@@ -59,3 +40,38 @@ class ProductoCategoriaDetailView(DetailView):
 class ProductoCategoriaDeleteView(DeleteView):
     model = models.ProductoCategoria
     success_url = reverse_lazy("producto:productocategoria_list")
+
+
+# Vistas para el modelo Producto
+class ProductoListView(ListView):
+    model = models.Producto
+    context_object_name = "productos"
+
+    def get_queryset(self):
+        consulta = self.request.GET.get("consulta")
+        if consulta:
+            queryset = models.Producto.objects.filter(nombre__icontains=consulta)
+        else:
+            queryset = models.Producto.objects.all()
+        return queryset
+
+
+class ProductoCreateView(CreateView):
+    model = models.Producto
+    form_class = forms.ProductoForm
+    success_url = reverse_lazy("producto:producto_list")
+
+
+class ProductoUpdateView(UpdateView):
+    model = models.Producto
+    form_class = forms.ProductoForm
+    success_url = reverse_lazy("producto:producto_list")
+
+
+class ProductoDetailView(DetailView):
+    model = models.Producto
+
+
+class ProductoDeleteView(DeleteView):
+    model = models.Producto
+    success_url = reverse_lazy("producto:producto_list")
