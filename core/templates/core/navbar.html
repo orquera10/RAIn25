@@ -1,11 +1,78 @@
-<nav style="display: flex; justify-content: space-between; align-items: center;">
-    <button>
-        <a href="{% url 'core:index' %}">Home</a>
-    </button>
-    <button>
-        <a href="{% url 'cliente:index' %}">Clientes</a>
-    </button>
-    <button>
-        <a href="{% url 'producto:index' %}">Productos</a>
-    </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <!-- Logo/Brand -->
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'core:index' %}">
+            <i class="bi bi-shop fs-4 me-2"></i>
+            Coderhouse
+        </a>
+
+        <!-- Botón hamburguesa para móviles -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" 
+                aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menú principal -->
+        <div class="collapse navbar-collapse" id="navbarMain">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.app_name == 'core' %}active{% endif %}" 
+                       href="{% url 'core:index' %}">
+                        <i class="bi bi-house-door me-1"></i>Inicio
+                    </a>
+                </li>
+                
+                <!-- Menú desplegable de Productos -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle {% if request.resolver_match.app_name == 'producto' %}active{% endif %}" 
+                       href="#" id="navbarDropdownProductos" role="button" 
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-box-seam me-1"></i>Productos
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownProductos">
+                        <li>
+                            <a class="dropdown-item" href="{% url 'producto:index' %}">
+                                <i class="bi bi-grid me-2"></i>Panel Productos
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'producto:productocategoria_list' %}">
+                                <i class="bi bi-tags me-2"></i>Categorías
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Menú desplegable de Clientes -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle {% if request.resolver_match.app_name == 'cliente' %}active{% endif %}" 
+                       href="#" id="navbarDropdownClientes" role="button" 
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-people me-1"></i>Clientes
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownClientes">
+                        <li>
+                            <a class="dropdown-item" href="{% url 'cliente:cliente_list' %}">
+                                <i class="bi bi-person-lines-fill me-2"></i>Lista de Clientes
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'cliente:pais_list' %}">
+                                <i class="bi bi-globe-americas me-2"></i>Países
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Botón de usuario (para futura implementación de login) -->
+            <div class="ms-lg-3">
+                <button class="btn btn-outline-light" type="button">
+                    <i class="bi bi-person-circle me-1"></i>Login
+                </button>
+            </div>
+        </div>
+    </div>
 </nav>

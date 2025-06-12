@@ -19,6 +19,15 @@ class ProductoCategoriaListView(ListView):
     # context_object_name = "productocategoria"
     # template_name = "producto/productocategoria_list.html"
 
+    def get_queryset(self):
+        consulta = self.request.GET.get("consulta")
+        if consulta:
+            queryset = models.ProductoCategoria.objects.filter(nombre__icontains=consulta)
+        else:
+            queryset = models.ProductoCategoria.objects.all()
+        return queryset
+
+
 
 # def productocategoria_create(request):
 #     if request.method == "GET":
