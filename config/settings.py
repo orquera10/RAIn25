@@ -25,9 +25,9 @@ from django.core.management.utils import get_random_secret_key
 SECRET_KEY = get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["esteban81.pythonanywhere.com"]
 
 
 # Application definition
@@ -127,3 +127,11 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "core:index"
+
+STATIC_ROOT = BASE_DIR / "static"
+try:
+    # importar la configuración de desarrollo (dev) cuando exista el archivo
+    from .settings_dev import *
+except ModuleNotFoundError:
+    # si no está, es porque settings_dev.py está en .gitignore y estamos en producción
+    pass
