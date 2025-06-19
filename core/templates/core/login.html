@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Login
+{% endblock title %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Iniciar sesión</button>
+    </form>    
+{% endblock content %}

@@ -73,9 +73,11 @@
 
             <!-- Botón de usuario (para futura implementación de login) -->
             <div class="ms-lg-3">
-                <button class="btn btn-outline-light" type="button">
-                    <i class="bi bi-person-circle me-1"></i>Login
-                </button>
+                <a href="{% url 'core:login' %}">
+                    <button class="btn btn-outline-light" type="button">
+                        <i class="bi bi-person-circle me-1"></i>Login
+                    </button>
+                </a>
             </div>
         </div>
     </div>
