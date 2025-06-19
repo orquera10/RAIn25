@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Cerrar sesión
+{% endblock title %}
+
+{% block content %}
+
+    <h1 class="text-center mt-5">Has cerrado sesión</h1>
+    <p class="text-center">Gracias por usar nuestra aplicación. Esperamos verte de nuevo pronto.</p>
+    <div class="d-flex justify-content-center mt-4">
+        <a href="{% url 'core:index' %}" class="btn btn-primary px-4">
+            <i class="bi bi-house-door me-1"></i> Volver al inicio
+        </a>
+    </div>
+{% endblock content %}
