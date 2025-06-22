@@ -73,7 +73,7 @@ data = []
 publicaciones_extraidas = 0
 intentos_maximos = 10
 
-while publicaciones_extraidas < 10 and intentos_maximos > 0:
+while publicaciones_extraidas < 50 and intentos_maximos > 0:
     publicaciones = muro.find_elements(By.XPATH, './div')
 
     if publicaciones_extraidas >= len(publicaciones):
