@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-  Nuestros Sabores
+  Proyecto RAIn 2025
 {% endblock title %}
 
 {% block content %}
@@ -14,69 +14,100 @@
     height: 100%;
     width: 100%;
     z-index: -1;
-    background-image: url('https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-image: url('https://wallpapercat.com/w/full/3/a/b/1251773-3840x2160-desktop-4k-facebook-background.jpg');
     background-size: cover;
     background-position: center;
     filter: blur(8px);
     -webkit-filter: blur(8px);
   }
 
-  .carousel-caption h5,
-  .carousel-caption p {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    border-radius: 5px;
-  }
-
   h1.display-4 {
-      color: white;
-      text-shadow: 2px 2px 4px #000000;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
   }
 </style>
 
 <div class="container mt-5">
   <div class="row">
     <div class="col-lg-8 mx-auto">
-      <h1 class="display-4 text-center mb-4">Descubre un Mundo de Sabores</h1>
-      <div id="gastronomyCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#gastronomyCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#gastronomyCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#gastronomyCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="Pasta Fresca">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Pasta Fresca</h5>
-              <p>El auténtico sabor de Italia en tu mesa.</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="Postres Deliciosos">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Postres Deliciosos</h5>
-              <p>Un dulce final para una comida perfecta.</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="https://images.pexels.com/photos/674574/pexels-photo-674574.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="Parrillada Argentina">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Parrillada Argentina</h5>
-              <p>La mejor selección de carnes a la parrilla.</p>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#gastronomyCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#gastronomyCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+      <h1 class="display-4 text-center mb-4">Scrapper de Facebook</h1>
+
+      <!-- Mensaje de instrucciones -->
+      <div id="manual-instructions" class="alert alert-warning d-none" role="alert">
+        <strong>Atención:</strong> Se abrirá una ventana para iniciar sesión en Facebook manualmente. Tenés 60 segundos para iniciar sesión; luego el proceso continuará automáticamente.
       </div>
+
+      <!-- Spinner de carga -->
+      <div id="loader" class="text-center d-none mb-4">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="text-white mt-2">Cargando publicaciones, por favor esperá...</p>
+      </div>
+
+      <!-- Formulario -->
+      <div class="card bg-dark text-white mb-4">
+        <div class="card-body">
+          <form method="POST" class="row g-3">
+            {% csrf_token %}
+            <div class="col-12">
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="bi bi-person"></i>
+                </span>
+                <input type="text" class="form-control" name="faceName" placeholder="Nombre de usuario de Facebook" required>
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-search"></i> Obtener Publicaciones
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      {% if publicaciones %}
+        <h2 class="text-white mb-4">Resultados:</h2>
+        <div class="row">
+          {% for pub in publicaciones %}
+            <div class="col-md-6 mb-4">
+              <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                  <h5 class="card-title">#{{ pub.numero }}</h5>
+                  <p class="card-text">{{ pub.texto_cuerpo }}</p>
+                  <p class="card-text">
+                    <small class="text-muted">Reacciones: {{ pub.reacciones }} | Comentarios: {{ pub.comentarios }}</small>
+                  </p>
+                  <a href="{{ pub.post_url }}" target="_blank" class="btn btn-sm btn-outline-primary">Ver publicación</a>
+                </div>
+                {% if pub.fotos %}
+                  <div class="card-footer bg-white">
+                    <div class="d-flex flex-wrap gap-2">
+                      {% for foto in pub.fotos %}
+                        <img src="{{ foto }}" class="img-thumbnail" style="width: 80px; height: auto;">
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>
+
+<!-- Script para mostrar spinner y mensaje -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+    const loader = document.getElementById('loader');
+    const instructions = document.getElementById('manual-instructions');
+
+    form.addEventListener('submit', function () {
+      loader.classList.remove('d-none');
+      instructions.classList.remove('d-none');
+    });
+  });
+</script>
 {% endblock content %}
