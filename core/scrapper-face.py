@@ -73,7 +73,7 @@ data = []
 publicaciones_extraidas = 0
 intentos_maximos = 10
 
-while publicaciones_extraidas < 50 and intentos_maximos > 0:
+while publicaciones_extraidas < 10 and intentos_maximos > 0:
     publicaciones = muro.find_elements(By.XPATH, './div')
 
     if publicaciones_extraidas >= len(publicaciones):
@@ -101,10 +101,12 @@ while publicaciones_extraidas < 50 and intentos_maximos > 0:
     reacciones = None
     comentarios = None
 
+    # Extraer métricas: reacciones, comentarios
     try:
         spans = pub.find_elements(By.XPATH, './/span[contains(@class, "html-span")]')
         for s in spans:
             texto = s.text.strip().lower()
+
             match = re.search(r'([\d.,]+)\s*(mil|k)?', texto)
             numero_limpio = match.group(0).strip() if match else None
 
@@ -112,8 +114,9 @@ while publicaciones_extraidas < 50 and intentos_maximos > 0:
                 reacciones = numero_limpio
             elif "comentario" in texto and not comentarios:
                 comentarios = numero_limpio
+
     except Exception as e:
-        print("Error extrayendo métricas:", e)
+        print("⚠️ Error extrayendo métricas:", e)
 
     enlaces = pub.find_elements(By.XPATH, './/a[contains(@href, "/photo/") or contains(@href, "/posts/") or contains(@href, "/videos/")]')
     for enlace in enlaces:
